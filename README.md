@@ -63,6 +63,17 @@ The freestanding web allocator has a 1 MiB heap and does not reclaim allocations
 `realloc` does not preserve existing data. Some GL bridge operations are incomplete.
 Check these limits before adding allocations or new rendering features.
 
+## Open in GAMS
+
+```sh
+make open  # download GAMS if absent, then open this Project
+```
+
+Requires macOS Apple Silicon, Make, curl, Python 3 and `unzip`. Uses the latest
+published `kkgams/gams` release at `tools/gams.app`; existing apps are not updated.
+Remove that directory to download a newer release. The Host stays attached to the
+terminal for logs. Existing `make run` behavior is unchanged.
+
 ## Editor
 
 Run `make open` to use the Files/Code workspace in the local `gams.json`.
