@@ -72,6 +72,16 @@ never updating an existing download implicitly. It explicitly sets `GAMS_APP_CWD
 to this repository and needs no neighboring checkout or compiled game artifacts.
 Standalone builds do not require GAMS or its installed Units.
 
+Download the optional Host on macOS Apple Silicon (requires `unzip`):
+
+```sh
+make tools/gams.app  # latest published kkgams/gams release, only if absent
+```
+
+The app installs at `tools/gams.app` without launching. Existing apps are left
+untouched; remove that directory to download a newer release. Temporary downloads
+are cleaned on success or failure. `make clean` preserves the app.
+
 ## Publish web
 
 The Pages workflow builds pushes to `release` and pull requests targeting
