@@ -1,4 +1,4 @@
-name: Build and deploy web game
+name: Build and deploy documentation and web game
 
 on:
   push:
@@ -28,13 +28,21 @@ jobs:
         uses: mlugg/setup-zig@v2
         with:
           version: 0.17.0
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      - name: Build documentation
+        run: make docs
       - name: Build web game
         run: make web
-      - name: Upload static game
+      - name: Include standalone game
+        run: cp -R build.nosync/web build.nosync/site/play
+      - name: Upload documentation and game
         if: github.ref == 'refs/heads/release'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build.nosync/web
+          path: build.nosync/site
 
   deploy:
     if: github.ref == 'refs/heads/release'

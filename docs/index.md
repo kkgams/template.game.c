@@ -24,6 +24,16 @@ Use `PORT=…` for the game server and `DOCS_PORT=…` for documentation.
 The docs server reloads content as Markdown files change. To run natively,
 use `make run` instead of `make play`.
 
+`make docs` builds the portable documentation site in `build.nosync/site/`.
+Release-branch pushes publish it at the Pages root and the standalone game at
+`play/`; `build.nosync/web/` remains independently deployable.
+
+Run `make open` to open the local Files/Code Project in GAMS on macOS Apple
+Silicon. It downloads missing `tools/gams.app` with release notices (requires
+unzip), retains existing downloads and sets `GAMS_APP_CWD` to this repository.
+The editor loads source directly and needs no compiled game artifacts or sibling
+checkout. Configured published Units install on first launch.
+
 ## Change the game
 
 Start in `game/main.c`. Create rendering resources in `init()`, draw in `frame()`,

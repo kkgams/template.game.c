@@ -26,7 +26,8 @@ Run `make serve-docs` in another terminal alongside the game. Documentation is
 served at http://localhost:8080; `DOCS_PORT=…` changes only the docs port.
 Edit `docs/index.md` for the development guide. Run `make validate-docs` to check
 its structure and links. The pinned wiki engine downloads on first use into
-`build.nosync/`; validation requires Node.js 22+.
+`build.nosync/`; documentation commands require Node.js 22+.
+Run `make docs` to build the portable site in `build.nosync/site/`.
 
 ## Develop
 
@@ -64,8 +65,12 @@ Check these limits before adding allocations or new rendering features.
 
 ## Editor
 
-Open this directory in GAMS to use the Files/Code workspace configured in
-`gams.json`. Standalone builds do not require GAMS or its installed Units.
+Run `make open` to use the Files/Code workspace in the local `gams.json`.
+On macOS Apple Silicon, this downloads the released Host into ignored
+`tools/gams.app` when absent (requires unzip), preserving release notices and
+never updating an existing download implicitly. It explicitly sets `GAMS_APP_CWD`
+to this repository and needs no neighboring checkout or compiled game artifacts.
+Standalone builds do not require GAMS or its installed Units.
 
 ## Publish web
 
@@ -74,5 +79,6 @@ The Pages workflow builds pushes to `release` and pull requests targeting
 Enable **GitHub Actions** as the Pages source and allow `release` in the
 `github-pages` environment.
 
-Only `build.nosync/web/` is deployed. Relative asset URLs support hosting under a
-repository subpath. Change `.github/workflows/pages.yml` if using another branch.
+Every push to `release` runs `make docs` and publishes documentation at the site
+root, with the standalone web game at `play/`. The workflow still builds `make web`;
+`build.nosync/web/` remains independently deployable with relative asset URLs.
