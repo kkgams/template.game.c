@@ -150,9 +150,9 @@ $(WIKI_MAKEFILE):
 serve-docs validate-docs build-docs: $(WIKI_MAKEFILE)
 	$(MAKE) -f "$(WIKI_MAKEFILE)" "$(patsubst %-docs,%,$@)" WIKI_REPOSITORY="$(WIKI_REPOSITORY)" WIKI_VERSION="$(WIKI_VERSION)" WIKI_ENGINE="$(WIKI_ENGINE)" WIKI_SOURCE="$(abspath docs)" WIKI_OUTPUT="$(abspath $(BUILD)/site)" PORT="$(DOCS_PORT)"
 
-# Retain downloaded tools and committed/generated shader headers.
+# Retain committed/generated shader headers; remove disposable downloads.
 clean:
-	rm -rf $(BUILD)
+	python3 scripts/clean.py
 
 -include $(SHADER_DEPFILES)
 

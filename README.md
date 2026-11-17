@@ -55,7 +55,7 @@ the resulting changes. Download sources can be overridden with `SOKOL_URL` and
 `SHDC_URL`; upstream versions may introduce incompatible changes.
 
 Build output lives in `build.nosync/`, downloaded tools in `tools/`.
-`make clean` removes build output while preserving tools and generated headers.
+`make clean` removes disposable output and downloads, preserving generated shader headers.
 
 ## Runtime limits
 
@@ -91,7 +91,7 @@ make tools/gams.app  # latest published kkgams/gams release, only if absent
 
 The app installs at `tools/gams.app` without launching. Existing apps are left
 untouched; remove that directory to download a newer release. Temporary downloads
-are cleaned on success or failure. `make clean` preserves the app.
+are cleaned on success or failure. `make clean` removes the downloaded app and notices.
 
 ## Publish web
 
@@ -103,3 +103,12 @@ Enable **GitHub Actions** as the Pages source and allow `release` in the
 Every push to `release` runs `make docs` and publishes documentation at the site
 root, with the standalone web game at `play/`. The workflow still builds `make web`;
 `build.nosync/web/` remains independently deployable with relative asset URLs.
+
+## Clean disposable files
+
+`make clean` removes the complete `build.nosync/`, `tools/` and `gams_modules/` directories,
+including unmarked downloads and caches.
+All deletion targets are checked for tracked files and symlinks before anything
+is removed; either causes clean to fail without deleting other targets. Authored
+sources, assets and data outside these disposable paths are preserved. Do not put
+required inputs in disposable directories. Requires Python 3 and Git.
