@@ -1,8 +1,8 @@
 #include "../app.h"
 #include "../vendor/sokol_app.h"
 #include "../vendor/sokol_gfx.h"
-#include "../vendor/sokol_log.h"
 #include "../vendor/sokol_glue.h"
+#include "../vendor/sokol_log.h"
 
 sg_swapchain get_sokol_swapchain(void) { return sglue_swapchain(); }
 

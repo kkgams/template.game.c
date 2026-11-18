@@ -30,7 +30,7 @@ typedef void GLvoid;
 typedef int64_t GLint64;
 typedef float GLfloat;
 typedef int GLint;
-typedef struct __GLsync* GLsync;
+typedef struct __GLsync *GLsync;
 
 // GL constants
 #define GL_FALSE 0

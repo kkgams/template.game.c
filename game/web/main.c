@@ -16,8 +16,8 @@
 void slog_func(const char *tag, uint32_t log_level, uint32_t log_item,
                const char *message, uint32_t line_nr, const char *filename,
                void *user_data) {
-  __attribute__((import_module("env"), import_name("game_log"))) void
-  game_log(uint32_t level, const char *message, uint32_t item);
+  __attribute__((import_module("env"), import_name("game_log"))) void game_log(
+      uint32_t level, const char *message, uint32_t item);
   game_log(log_level, message, log_item);
   (void)tag;
   (void)line_nr;
@@ -71,4 +71,3 @@ __attribute__((visibility("default"), export_name("cleanup"))) void
 platform_cleanup(void) {
   cleanup(); // App cleanup from main.c
 }
-

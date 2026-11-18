@@ -1,3 +1,4 @@
+// clang-format off: Sokol shader directives must stay on their own lines.
 @vs vs
 in vec4 position;
 in vec4 color0;
